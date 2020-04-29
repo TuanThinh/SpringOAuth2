@@ -1,0 +1,13 @@
+server:
+  port: 8080
+spring:
+  data:
+    mongodb:
+      database: authdb
+      host: localhost
+      port: 27017
+logging:
+  level:
+    org:
+      hibernate:
+        type: DEBUG

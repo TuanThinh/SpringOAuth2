@@ -1,0 +1,23 @@
+
+server:
+  port: 8181
+spring:
+  data:
+    mongodb:
+      database: authdb
+      host: localhost
+      port: 27017
+  application:
+    name: profile
+security:
+  oauth2:
+    resource:
+      token-info-uri: http://localhost:8080/oauth/check_token
+    client:
+      client-id: resource
+      client-secret: 12345
+logging:
+  level:
+    org:
+      hibernate:
+        type: ERROR

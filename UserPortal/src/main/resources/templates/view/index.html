@@ -1,0 +1,73 @@
+<!doctype html>
+
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layouts/admin-layout :: main-fragment(~{::title}, ~{::pageTitle}, ~{::mainContent}, ~{::#caching-resources})}">
+
+<title>Dashboard</title>
+
+<div th:fragment="pageTitle">
+	<ol class="breadcrumb text-right">
+		<li class="active">Dashboard</li>
+	</ol>
+</div>
+
+<div th:fragment="mainContent">
+	<div class="row">
+		<div class="col-12" style="display: none;">
+			<div class="text-center">
+				<img class="rounded-circle mb-3" alt="Ảnh cá nhân" src="/images/admin.jpg" width="150px">
+			</div>
+		</div>
+		<h2 class="col-12 text-center mb-4">Xin chào Đỗ Tuấn Thịnh</h2>
+		<div class="col-12 text-center mb-4 ">Quản lý thông tin, quyền riêng tư và các tùy chọn bảo mật của bạn để OAuth hoạt động hiệu quả hơn cho bạn</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-lg-6">
+			<div class="card">
+				<div class="_header_ p-4">
+					<div class="row">
+						<div class="col-lg-8">
+							<h3 class="mb-3">Thông tin cá nhân và quyền riêng tư</h3>
+							<div>
+								Xem dữ liệu trong Tài khoản Google của bạn và chọn hoạt động sẽ được lưu để cá nhân hóa trải nghiệm của bạn trên Google
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<img class="" alt="Ảnh cá nhân" src="/images/privacycheckup.png">
+						</div>
+					</div>
+				</div>
+				<hr class="m-0">
+				<div class="_footer_ p-4">
+					<a class="text-primary" th:href="@{/personal-inf}">Quản lý dữ liệu và cài đặt cá nhân hóa</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-lg-6">
+			<div class="card">
+				<div class="_header_ p-4" style="height: 226px;">
+					<div class="row">
+						<div class="col-lg-8">
+							<h3 class="mb-3">Các ứng dụng được ủy quyền</h3>
+							<div>
+								Các ứng dụng được phép truy cập vào tài khoản của bạn
+							</div>
+						</div>
+						<div class="col-lg-4">
+							<img class="" alt="Ảnh" src="/images/securitycheckup.png">
+						</div>
+					</div>
+				</div>
+				<hr class="m-0">
+				<div class="_footer_ p-4">
+					<a class="text-primary" th:href="@{/applications}">Quản lý các ứng dụng</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+</html>
