@@ -10,4 +10,6 @@ public interface KhachHangService {
 	Optional<KhachHang> findById(String id);
 	KhachHang save(KhachHang khachhang);
 	String deleteById(String id);
+	
+	String getUsername();
 }

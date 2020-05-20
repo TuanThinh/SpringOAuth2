@@ -1,4 +1,4 @@
-package mta.tuanthinh.controller;
+package mta.tuanthinh.api;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,19 +25,20 @@ public class KhachHangApi {
 	private KhachHangService khachHangService;
 	
 	@GetMapping(value = "/all", produces = {MediaType.APPLICATION_JSON_VALUE})
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public List<KhachHang> findAll(){
+		khachHangService.getUsername();
 		return khachHangService.findAll();
 	}
 	
 	@GetMapping(value = "/id/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public KhachHang findById(@PathVariable String id){
 		Optional<KhachHang> kh = khachHangService.findById(id);
 		return kh.get();
 	}
 	
 	@PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=utf-8")
-	@PreAuthorize("hasAuthority('create_profile')")
+	@PreAuthorize("hasAuthority('CREATE_PROFILE')")
 	public KhachHang save(@RequestBody KhachHang khachHang) {
 		return khachHangService.save(khachHang);
 	}

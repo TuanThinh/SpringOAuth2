@@ -1,0 +1,243 @@
+<!doctype html>
+
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layouts/admin-layout :: main-fragment(~{::title}, ~{::pageTitle}, ~{::mainContent}, ~{::#oauth-client})}">
+
+<title>Dashboard</title>
+
+<div th:fragment="pageTitle">
+	<ol class="breadcrumb text-right">
+		<li class="active">Dashboard</li>
+	</ol>
+</div>
+
+<div th:fragment="mainContent">
+	<div class="row">
+		<div class="col-lg-5">
+			<button class="btn btn-primary" data-toggle="modal"
+				data-target="#add">Thiết lập ứng dụng</button>
+		</div>
+		<div class="col-lg-7 d-flex justify-content-end form-group">
+			<input class="col-lg-6 form-control" type="text"
+				placeholder="Tìm kiếm..." id="search-client" />
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-header">
+					<strong class="card-title">Những trang web mà bạn đăng ký
+						có thể truy cập bằng tài khoản OAuth</strong>
+				</div>
+				<div class="card-body">
+					<input type="hidden" class="id_select" value=""/>
+					<table class="table table-hover" id="table-client">
+						<thead>
+							<tr>
+								<th scope="col">Tên</th>
+								<th scope="col">Mã bảo mật</th>
+								<th scope="col">URL</th>
+								<th scope="col">Scope</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>xxxxxxx</td>
+								<td>xxxxxxx</td>
+								<td>xxxxxxx</td>
+								<td>xxxxxxx</td>
+								<td><span data-toggle="modal" data-target="#modalEdit">
+										<i class="fa fa-wrench text-primary" data-toggle="tooltip"
+										data-placement="top" title="Chỉnh sửa"></i>
+								</span> | <span data-toggle="modal" data-target="#modalDelete">
+										<i class="fa fa-times text-danger" data-toggle="tooltip"
+										data-placement="top" title="Xóa"></i>
+								</span></td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="add" tabindex="-1"
+		aria-labelledby="staticModalLabel" data-backdrop="static"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Thiết lập ứng
+						dụng đăng nhập bằng OAuth</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row border">
+						<div class="col-lg-12 p-0">
+							<div class="font-weight-bold p-2">1. Cho chúng tôi biết tên
+								trang web của bạn</div>
+							<hr class="m-0">
+							<div class="col-lg-12 p-3">
+								Cho chúng tôi biết tên trang web của bạn là gì.
+								<div class="border col-lg-12 p-3">
+									<div class="font-weight-bold">Tên trang web</div>
+									Là một chuỗi ký tự được sử dụng bởi Service API để định danh
+									ứng dụng, đồng thời cũng được dùng để xây dựng "authorization
+									URL" hiển thị phía User. <input class="form-control my-3 web-name"
+										placeholder="Tên trang web" />
+									<hr class="m-0">
+									<div class="font-weight-bold mt-3">Mã bảo mật trang web</div>
+									Là một chuỗi ký tự được sử dụng để xác thực định danh (ID) của
+									ứng dụng khi ứng dụng yêu cầu truy cập thông tin tài khoản của
+									User. Chuỗi này được giữ bí mật giữa Application và API. 
+									<input class="form-control my-3 web-code" placeholder="Mã bảo mật" /> 
+									<!-- Xác nhận. Nhập lại mã! 
+									<input class="form-control my-3" placeholder="Nhập lại mã" /> -->
+									<hr class="m-0">
+									<div class="font-weight-bold mt-3">URL trang web</div>
+									Là đường link URL mà Authorization Server sẽ gửi Authorization
+									Code sau khi User đăng nhập. <input class="form-control my-2 web-url"
+										placeholder="URL trang web" />
+								</div>
+							</div>
+						</div>
+
+						<div class="col-lg-12 p-0">
+							<div class="font-weight-bold p-2">2. Tùy chọn cấu hình cho
+								trang web của bạn</div>
+							<hr class="m-0">
+							<div class="col-lg-12 p-3">
+								Các thông tin cấu hình.
+								<div class="border col-lg-12 p-3">
+									<div class="font-weight-bold">Scope</div>
+									<div class="form-group row check-scope mt-2 web-scopes">
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary register-web" data-dismiss="modal"
+						data-toggle="modal" data-target="#thong-bao">Thiết lập</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="staticModalLabel" data-backdrop="static" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Thiết lập lại ứng dụng</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="form-group row">
+						<div class="col-md-3">
+							<label class="col-form-label">Tên trang web</label>
+						</div>
+						<div class="col-md-9">
+							<input class="form-control edit-name" placeholder="">
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-md-3">
+							<label class="col-form-label">Mã bảo mật</label>
+						</div>
+						<div class="col-md-9">
+							<input class="form-control edit-code" placeholder="Enter value to change">
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-md-3">
+							<label class="col-form-label">URL trang web</label>
+						</div>
+						<div class="col-md-9">
+							<input class="form-control edit-url" placeholder="">
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-md-3">
+							<label class="col-form-label">Scope</label>
+						</div>
+						<div class="col-md-9">
+							<div class="form-group row check-scope mt-2 edit-scopes">
+								
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!--         Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary update-client" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog"
+		aria-labelledby="SmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel">Xác nhận</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>Bạn có chắc muốn xóa item này không?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary delete-client" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Xóa</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="thong-bao" tabindex="-1" role="dialog"
+		aria-labelledby="SmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel">Thông báo</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p class="notification"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Thoát</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<th:block id="oauth-client">
+	<script th:src="@{/assets/js/oauth-client.js}"></script>
+</th:block>
+</html>

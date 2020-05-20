@@ -1,11 +1,6 @@
-package mta.tuanthinh.document;
+package mta.tuanthinh.modal;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection = "khach_hang")
 public class KhachHang {
-	@Id
 	private String id;
 
 	private String firstName;
@@ -64,5 +59,28 @@ public class KhachHang {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public KhachHang(String id, String firstName, String lastName, String diaChi, String dienThoai, String email) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.diaChi = diaChi;
+		this.dienThoai = dienThoai;
+		this.email = email;
+	}
+	
+	public KhachHang(String firstName, String lastName, String diaChi, String dienThoai, String email) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.diaChi = diaChi;
+		this.dienThoai = dienThoai;
+		this.email = email;
+	}
+
+	public KhachHang() {
+		
 	}
 }

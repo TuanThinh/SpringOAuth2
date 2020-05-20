@@ -13,7 +13,6 @@ public class Role implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@Field(name = "_id")
 	private String id;
 	
 	@Field(name = "name")

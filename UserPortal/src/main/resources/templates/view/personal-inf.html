@@ -1,7 +1,7 @@
 <!doctype html>
 
 <html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layouts/admin-layout :: main-fragment(~{::title}, ~{::pageTitle}, ~{::mainContent}, ~{::#caching-resources})}">
+	th:replace="~{layouts/admin-layout :: main-fragment(~{::title}, ~{::pageTitle}, ~{::mainContent}, ~{::#personal-inf})}">
 
 <title>Dashboard</title>
 
@@ -26,24 +26,24 @@
                <div class="card-body">
                   <table class="table table-hover">
 				    <tbody>
-				      <tr>
+				      <tr class="row-fullname" data-toggle="modal" data-target="#modalFullname">
 				        <td>Tên</td>
-				        <td>Đỗ Tuấn Thịnh</td>
+				        <td><span class="firstName"></span><span class="lastName"></span></td>
 				        <td></td>
 				      </tr>
-				      <tr>
+				      <tr class="row-birthday" data-toggle="modal" data-target="#modalBirthday">
 				        <td>Ngày sinh</td>
-				        <td>12-12-1996</td>
+				        <td><span class="birthday"></span></td>
 				        <td></td>
 				      </tr>
-				      <tr>
+				      <tr class="row-gender" data-toggle="modal" data-target="#modalGender">
 				        <td>Giới tính</td>
-				        <td>Nam</td>
+				        <td><span class="gender"></span></td>
 				        <td></td>
 				      </tr>
-				      <tr>
+				      <tr class="row-password" data-toggle="modal" data-target="#modalPassword">
 				        <td>Mật khẩu</td>
-				        <td>********</td>
+				        <td><span class="password"></span></td>
 				        <td></td>
 				      </tr>
 				    </tbody>
@@ -62,14 +62,14 @@
                <div class="card-body">
                   <table class="table table-hover">
 				    <tbody>
-				      <tr>
+				      <tr class="row-email" data-toggle="modal" data-target="#modalEmail">
 				        <td>Email</td>
-				        <td>thinhdt@gmail.com</td>
+				        <td><span class="email"></span></td>
 				        <td></td>
 				      </tr>
-				      <tr>
+				      <tr class="row-phonenumber" data-toggle="modal" data-target="#modalPhoneNumber">
 				        <td>Điện thoại</td>
-				        <td>0989123456</td>
+				        <td><span class="phoneNumber"></span></td>
 				        <td></td>
 				      </tr>
 				    </tbody>
@@ -87,11 +87,11 @@
 						<div class="col-lg-8">
 							<h3 class="mb-3">Chọn thông tin những người khác sẽ thấy</h3>
 							<div>
-								Bạn là người quyết định những thông tin sẽ hiển thị cho người khác trên các dịch vụ của Google
+								Bạn là người quyết định những thông tin sẽ hiển thị cho người khác trên các dịch vụ của OAuth
 							</div>
 						</div>
 						<div class="col-lg-4">
-							<img class="" alt="Ảnh" src="/images/aboutme.png">
+							<img class="" alt="áº¢nh" src="/images/aboutme.png">
 						</div>
 					</div>
 				</div>
@@ -103,12 +103,290 @@
 		</div>
 	</div>
 	
-	<style>
+	<div class="modal fade" id="modalFullname" tabindex="-1" aria-labelledby="staticModalLabel" data-backdrop="static" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Cập nhật họ tên</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="form-group row">
+						<div class="offset-md-2 col-md-2">
+							<label class="col-form-label">Họ</label>
+						</div>
+						<div class="col-md-6">
+							<input class="form-control edit-firstName" placeholder="Họ">
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="offset-md-2 col-md-2">
+							<label class="col-form-label">Tên</label>
+						</div>
+						<div class="col-md-6">
+							<input class="form-control edit-lastName" placeholder="Tên">
+						</div>
+					</div>
+				</div>
+				
+				<!--         Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal" id="modalBirthday" tabindex="-1" aria-labelledby="staticModalLabel" data-backdrop="static" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Cập nhật ngày sinh</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="form-group row">
+						<div class="offset-md-1 col-md-3">
+							<input class="form-control edit-day" placeholder="Ngày">
+						</div>
+						<div class="col-md-4">
+							<select class="form-control edit-month">
+						        <option value="0">Tháng</option>
+						        <option value="1">Tháng 1</option>
+						        <option value="2">Tháng 2</option>
+						        <option value="3">Tháng 3</option>
+						        <option value="4">Tháng 4</option>
+						        <option value="5">Tháng 5</option>
+						        <option value="6">Tháng 6</option>
+						        <option value="7">Tháng 7</option>
+						        <option value="8">Tháng 8</option>
+						        <option value="9">Tháng 9</option>
+						        <option value="10">Tháng 10</option>
+						        <option value="11">Tháng 11</option>
+						        <option value="12">Tháng 12</option>
+						     </select>
+						</div>
+						<div class="col-md-3">
+							<input class="form-control edit-year" placeholder="Năm">
+						</div>
+					</div>
+				</div>
+				
+				<!--         Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal" id="modalGender" tabindex="-1" aria-labelledby="staticModalLabel" data-backdrop="static" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Cập nhật Giới tính</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="form-group row">
+						<div class="offset-md-3">
+							<label class="col-form-label">Giới tính</label>
+						</div>
+						<div class="col-md-3">
+							<select class="form-control edit-gender">
+						        <option value="0">Nam</option>
+						        <option value="1">Nữ</option>
+						        <option value="2">Khác</option>
+						     </select>
+						</div>
+					</div>
+				</div>
+				
+				<!--         Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal" id="modalPassword" tabindex="-1" aria-labelledby="staticModalLabel" data-backdrop="static" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Xác thực mật khẩu cũ</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="form-group row">
+						<div class="col-md-4">
+							<label class="col-form-label">Mật khẩu của bạn</label>
+						</div>
+						<div class="col-md-8">
+							<input class="form-control ex-password" placeholder="*******">
+						</div>
+					</div>
+				</div>
+				
+				<!--         Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Xác thực</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modalChangePassword" tabindex="-1" aria-labelledby="staticModalLabel" data-backdrop="static" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Cập nhật mật khẩu</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="form-group row">
+						<div class="col-md-4">
+							<label class="col-form-label">Mật khẩu mới</label>
+						</div>
+						<div class="col-md-8">
+							<input class="form-control edit-password" placeholder="">
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-md-4">
+							<label class="col-form-label">Nhập lại mật khẩu</label>
+						</div>
+						<div class="col-md-8">
+							<input class="form-control confirm-password" placeholder="">
+						</div>
+					</div>
+				</div>
+				
+				<!--         Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal" id="modalEmail" tabindex="-1" aria-labelledby="staticModalLabel" data-backdrop="static" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Cập nhật email</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="form-group row">
+						<div class="offset-md-2">
+							<label class="col-form-label">Email</label>
+						</div>
+						<div class="col-md-7">
+							<input class="form-control edit-email" placeholder="">
+						</div>
+					</div>
+				</div>
+				
+				<!--         Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal" id="modalPhoneNumber" tabindex="-1" aria-labelledby="staticModalLabel" data-backdrop="static" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Cập nhật số điện thoại</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<div class="form-group row">
+						<div class="offset-md-2">
+							<label class="col-form-label">Số điện thoại</label>
+						</div>
+						<div class="col-md-6">
+							<input class="form-control edit-phonenumber" placeholder="">
+						</div>
+					</div>
+				</div>
+				
+				<!--         Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="thong-bao"tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="smallmodalLabel">Thông báo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        ------------------------
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<style type="text/css">
 		table td:hover {
 			cursor: pointer;
 		}
 	</style>
 </div>
 
+<th:block id="personal-inf">
+   <script th:src="@{/assets/js/personal-inf.js}"></script>
+</th:block>
 
 </html>

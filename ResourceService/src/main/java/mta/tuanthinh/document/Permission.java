@@ -4,15 +4,13 @@ import java.io.Serializable;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "permission")
 public class Permission implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
     private String id;
-	
-	@Field(name = "name")
+
     private String name;
 	public String getId() {
 		return id;

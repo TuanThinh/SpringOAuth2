@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -18,8 +19,10 @@ public class OAuthClientDetails implements ClientDetails{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Field(name = "_id")
     private String id;
+	
+	@Field(name = "username")
+	private String username;
 
 	@Field(name = "client_id")
     private String clientId;
@@ -31,7 +34,7 @@ public class OAuthClientDetails implements ClientDetails{
     private String grantTypes;
 
 	@Field(name = "scopes")
-    private String scopes;
+    private List<Scope> scopes;
 
 	@Field(name = "resource_ids")
     private String resources;
@@ -75,7 +78,14 @@ public class OAuthClientDetails implements ClientDetails{
 
 	@Override
 	public Set<String> getScope() {
-		return scopes != null ? new HashSet<>(Arrays.asList(scopes.split(","))) : null;
+		if(scopes != null) {
+			Set<String> setScopes = new HashSet<>();
+			scopes.forEach(scope -> {
+				setScopes.add(scope.getName());
+			});
+			return setScopes;
+		}
+		return null;
 	}
 
 	@Override
@@ -117,7 +127,15 @@ public class OAuthClientDetails implements ClientDetails{
         this.id = id;
     }
 
-    public void setClientId(String clientId) {
+    public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setClientId(String clientId) {
         this.clientId = clientId;
     }
 
@@ -129,7 +147,7 @@ public class OAuthClientDetails implements ClientDetails{
         this.grantTypes = grantTypes;
     }
 
-    public void setScopes(String scopes) {
+    public void setScopes(List<Scope> scopes) {
         this.scopes = scopes;
     }
 
