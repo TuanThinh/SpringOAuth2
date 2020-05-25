@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import mta.tuanthinh.modal.InfoPersonal;
+import mta.tuanthinh.modal.OAuthApproval;
 import mta.tuanthinh.modal.OAuthClientDetails;
 import mta.tuanthinh.utility.Utilities;
 
@@ -32,6 +33,23 @@ public class API {
 		String url = "http://localhost:8181/user/personal-inf";
 		HttpEntity<InfoPersonal> infoPersonalEntity = new HttpEntity<InfoPersonal>(Utilities.getHeader());
 		ResponseEntity<InfoPersonal> responseEntity = restTemplate.exchange(url, HttpMethod.GET, infoPersonalEntity, InfoPersonal.class);
+		return responseEntity.getBody();
+	}
+	
+	@GetMapping("/oauth-approval")
+	public List<OAuthApproval> getApprovalClient(){
+		String url = "http://localhost:8181/oauth-access-token/approval/current-user";
+		HttpEntity<OAuthApproval> entity = new HttpEntity<OAuthApproval>(Utilities.getHeader());
+		ResponseEntity<OAuthApproval[]> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, OAuthApproval[].class);
+		List<OAuthApproval> getListClient = Arrays.asList(responseEntity.getBody());
+		return getListClient;
+	}
+	
+	@DeleteMapping("/disapproval/{id}")
+	public String disapprovalClient(@PathVariable String id){
+		String url = "http://localhost:8181/oauth-access-token/disapproval/id/{id}";
+		HttpEntity<String> entity = new HttpEntity<String>(Utilities.getHeader());
+		ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.DELETE, entity, String.class, id);
 		return responseEntity.getBody();
 	}
 	

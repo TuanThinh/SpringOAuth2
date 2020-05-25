@@ -18,8 +18,13 @@ public class UserPortalApplication extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().anyRequest().authenticated();
 		http.csrf().disable();
+		http.authorizeRequests().anyRequest().authenticated();
+		http.logout()
+		.logoutUrl("/logout")
+		.logoutSuccessUrl("/")
+		.deleteCookies("JSESSIONID")
+		.invalidateHttpSession(true);
 	}
 	
 	@Bean

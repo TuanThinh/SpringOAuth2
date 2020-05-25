@@ -1,7 +1,7 @@
 <!doctype html>
 
 <html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layouts/admin-layout :: main-fragment(~{::title}, ~{::pageTitle}, ~{::mainContent}, ~{::#caching-resources})}">
+	th:replace="~{layouts/admin-layout :: main-fragment(~{::title}, ~{::pageTitle}, ~{::mainContent}, ~{::#application})}">
 
 <title>Dashboard</title>
 
@@ -13,22 +13,23 @@
 
 <div th:fragment="mainContent">
 	<div class="row">
-		<div class="col-12 text-center mb-4 ">Những trang web mà bạn có thể đăng nhập bằng tài khoản OAuth của bạn</div>
+		<div class="col-12 text-center mb-4 ">Những trang web mà bạn đã đăng nhập bằng tài khoản OAuth của bạn</div>
 	</div>
 	
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="card">
                <div class="card-header">
-                   <strong class="card-title">Những trang web mà bạn liên kết</strong>
+                   <strong class="card-title">Những trang web bạn đăng nhập bằng tài khoản OAuth</strong>
                </div>
                <div class="card-body">
-                  <table class="table table-hover">
+               	  <input type="hidden" class="id_select" value=""/>
+                  <table class="table table-hover" id="table-approval">
                   	<thead>
                         <tr>
                             <th scope="col">Tên</th>
-                            <th scope="col">URL</th>
                             <th scope="col">Scope</th>
+                            <th scope="col">Hết hiệu lực</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -37,20 +38,12 @@
 				        <td>xxxxxxx</td>
 				        <td>xxxxxxx</td>
 				        <td>xxxxxxx</td>
-				        <td><i class="fa fa-times text-danger"></i></td>
+				        <td><span data-toggle="modal" data-target="#modalDelete">
+										<i class="fa fa-times text-danger" data-toggle="tooltip"
+										data-placement="top" title="Xóa"></i>
+								</span></td>
 				      </tr>
-				      <tr>
-				        <td>xxxxxxx</td>
-				        <td>xxxxxxx</td>
-				        <td>xxxxxxx</td>
-				        <td><i class="fa fa-times text-danger"></i></td>
-				      </tr>
-				      <tr>
-				        <td>xxxxxxx</td>
-				        <td>xxxxxxx</td>
-				        <td>xxxxxxx</td>
-				        <td><i class="fa fa-times text-danger"></i></td>
-				      </tr>
+				     
 				    </tbody>
 				  </table>
                </div>
@@ -58,8 +51,55 @@
 		</div>
 	</div>
 	
+	<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog"
+		aria-labelledby="SmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel">Xác nhận</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>Bạn có chắc muốn xóa item này không?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary delete-client" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Xóa</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="thong-bao" tabindex="-1" role="dialog"
+		aria-labelledby="SmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel">Thông báo</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p class="notification"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Thoát</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	
 </div>
 
+<th:block id="application">
+	<script th:src="@{/assets/js/application.js}"></script>
+</th:block>
 
 </html>

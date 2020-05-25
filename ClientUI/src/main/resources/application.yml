@@ -3,11 +3,11 @@ server:
   servlet:
     session:
       cookie:
-        name: KSESSION
+        name: UISESSION
 security:
   oauth2:
     client:
-      client-id: demo1
+      client-id: noname
       client-secret: 12345
       user-authorization-uri: http://localhost:8080/oauth/authorize
       access-token-uri: http://localhost:8080/oauth/token

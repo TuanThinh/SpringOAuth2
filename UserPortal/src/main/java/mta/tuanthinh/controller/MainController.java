@@ -18,10 +18,11 @@ public class MainController {
 	
 	@GetMapping(value="/logout")
 	public String logout(HttpServletRequest request) {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    if (auth != null){    
-	    	SecurityContextHolder.getContext().setAuthentication(null);;
-	    }
+//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//	    if (auth != null){    
+//	    	SecurityContextHolder.getContext().setAuthentication(null);
+//			new SecurityContextLogoutHandler().logout(request, response, auth);
+//	    }
 //	    	    
 //	    try {
 //	        String authorization = request.getHeader("Authorization");
@@ -42,7 +43,7 @@ public class MainController {
 //	    if (request.getSession() != null) {
 //	        request.getSession().invalidate();
 //	    }
-		return "redirect:/login";
+		return "redirect:/";
 	}
 	
 	@GetMapping(value="/personal-inf")

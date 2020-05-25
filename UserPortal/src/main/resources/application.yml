@@ -3,7 +3,7 @@ server:
   servlet:
     session:
       cookie:
-        name: KSESSION
+        name: PSESSION
 security:
   oauth2:
     client:
