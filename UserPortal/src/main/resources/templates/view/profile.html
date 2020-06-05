@@ -1,7 +1,7 @@
 <!doctype html>
 
 <html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
-	th:replace="~{layouts/admin-layout :: main-fragment(~{::title}, ~{::pageTitle}, ~{::mainContent}, ~{::#caching-resources})}">
+	th:replace="~{layouts/admin-layout :: main-fragment(~{::title}, ~{::pageTitle}, ~{::mainContent}, ~{::#profile})}">
 
 <title>Dashboard</title>
 
@@ -33,18 +33,18 @@
 				    <tbody>
 				      <tr class="row-fullname" data-toggle="modal" data-target="#modalFullname">
 				        <td>Tên</td>
-				        <td>--------------</td>
-				        <td><i class="fa fa-lock text-primary"></i></td>
+				        <td><span class="fullname"></span></td>
+				        <td><input type="hidden" class="input-flag-fullname"/> <span class="icon-flag-fullname"></span></td>
 				      </tr>
 				      <tr class="row-birthday" data-toggle="modal" data-target="#modalBirthday">
 				        <td>Ngày sinh</td>
-				        <td>12-12-1996</td>
-				        <td><i class="fa fa-lock text-primary"></i></td>
+				        <td><span class="birthday"></span></td>
+				        <td><input type="hidden" class="input-flag-birthday"/> <span class="icon-flag-birthday"></span></td>
 				      </tr>
 				      <tr class="row-gender" data-toggle="modal" data-target="#modalGender">
 				        <td>Giới tính</td>
-				        <td>Nam</td>
-				        <td><i class="fa fa-lock text-primary"></i></td>
+				        <td><span class="gender"></span></td>
+				        <td><input type="hidden" class="input-flag-gender"/> <span class="icon-flag-gender"></span></td>
 				      </tr>
 				    </tbody>
 				  </table>
@@ -64,13 +64,13 @@
 				    <tbody>
 				      <tr class="row-email" data-toggle="modal" data-target="#modalEmail">
 				        <td>Email</td>
-				        <td>thinhdt@gmail.com</td>
-				        <td><i class="fa fa-lock text-primary"></i></td>
+				        <td><span class="email"></span></td>
+				        <td><input type="hidden" class="input-flag-email"/> <span class="icon-flag-email"></span></td>
 				      </tr>
 				      <tr class="row-phonenumber" data-toggle="modal" data-target="#modalPhoneNumber">
 				        <td>Điện thoại</td>
-				        <td>0989123456</td>
-				        <td><i class="fa fa-lock text-primary"></i></td>
+				        <td><span class="phonenumber"></span></td>
+				        <td><input type="hidden" class="input-flag-phonenumber"/> <span class="icon-flag-phonenumber"></span></td>
 				      </tr>
 				    </tbody>
 				  </table>
@@ -103,12 +103,12 @@
 					<div class="form-group row m-0">
 						<div class="col-md-6 text-center">
 							<label class="radio-inline">
-								<input type="radio" name="flag" value="0"><i class="fa fa-lock mx-2"></i>Chỉ mình tôi
+								<input type="radio" name="flag-fullname" value="0"><i class="fa fa-lock mx-2"></i>Chỉ mình tôi
 							</label>
 						</div>
 						<div class="col-md-6 text-center">
 							<label class="radio-inline">
-								<input type="radio" name="flag" value="1"><i class="fa fa-users mx-2"></i>Bất kỳ ai
+								<input type="radio" name="flag-fullname" value="1"><i class="fa fa-users mx-2"></i>Bất kỳ ai
 							</label>
 						</div>
 					</div>
@@ -116,7 +116,7 @@
 				
 				<!--         Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-primary btn-update-fullname" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
 				</div>
 			</div>
@@ -142,15 +142,15 @@
 						<div class="col-md-4">
 							<select class="form-control edit-month">
 						        <option value="0">Tháng</option>
-						        <option value="1">Tháng 1</option>
-						        <option value="2">Tháng 2</option>
-						        <option value="3">Tháng 3</option>
-						        <option value="4">Tháng 4</option>
-						        <option value="5">Tháng 5</option>
-						        <option value="6">Tháng 6</option>
-						        <option value="7">Tháng 7</option>
-						        <option value="8">Tháng 8</option>
-						        <option value="9">Tháng 9</option>
+						        <option value="01">Tháng 1</option>
+						        <option value="02">Tháng 2</option>
+						        <option value="03">Tháng 3</option>
+						        <option value="04">Tháng 4</option>
+						        <option value="05">Tháng 5</option>
+						        <option value="06">Tháng 6</option>
+						        <option value="07">Tháng 7</option>
+						        <option value="08">Tháng 8</option>
+						        <option value="09">Tháng 9</option>
 						        <option value="10">Tháng 10</option>
 						        <option value="11">Tháng 11</option>
 						        <option value="12">Tháng 12</option>
@@ -165,12 +165,12 @@
 					<div class="form-group row m-0">
 						<div class="col-md-6 text-center">
 							<label class="radio-inline">
-								<input type="radio" name="flag" value="0"><i class="fa fa-lock mx-2"></i>Chỉ mình tôi
+								<input type="radio" name="flag-birthday" value="0"><i class="fa fa-lock mx-2"></i>Chỉ mình tôi
 							</label>
 						</div>
 						<div class="col-md-6 text-center">
 							<label class="radio-inline">
-								<input type="radio" name="flag" value="1"><i class="fa fa-users mx-2"></i>Bất kỳ ai
+								<input type="radio" name="flag-birthday" value="1"><i class="fa fa-users mx-2"></i>Bất kỳ ai
 							</label>
 						</div>
 					</div>
@@ -178,7 +178,7 @@
 				
 				<!--         Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-primary btn-update-birthday" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
 				</div>
 			</div>
@@ -213,12 +213,12 @@
 					<div class="form-group row m-0">
 						<div class="col-md-6 text-center">
 							<label class="radio-inline">
-								<input type="radio" name="flag" value="0"><i class="fa fa-lock mx-2"></i>Chỉ mình tôi
+								<input type="radio" name="flag-gender" value="0"><i class="fa fa-lock mx-2"></i>Chỉ mình tôi
 							</label>
 						</div>
 						<div class="col-md-6 text-center">
 							<label class="radio-inline">
-								<input type="radio" name="flag" value="1"><i class="fa fa-users mx-2"></i>Bất kỳ ai
+								<input type="radio" name="flag-gender" value="1"><i class="fa fa-users mx-2"></i>Bất kỳ ai
 							</label>
 						</div>
 					</div>
@@ -226,7 +226,7 @@
 				
 				<!--         Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-primary btn-update-gender" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
 				</div>
 			</div>
@@ -257,12 +257,12 @@
 					<div class="form-group row m-0">
 						<div class="col-md-6 text-center">
 							<label class="radio-inline">
-								<input type="radio" name="flag" value="0"><i class="fa fa-lock mx-2"></i>Chỉ mình tôi
+								<input type="radio" name="flag-email" value="0"><i class="fa fa-lock mx-2"></i>Chỉ mình tôi
 							</label>
 						</div>
 						<div class="col-md-6 text-center">
 							<label class="radio-inline">
-								<input type="radio" name="flag" value="1"><i class="fa fa-users mx-2"></i>Bất kỳ ai
+								<input type="radio" name="flag-email" value="1"><i class="fa fa-users mx-2"></i>Bất kỳ ai
 							</label>
 						</div>
 					</div>
@@ -270,7 +270,7 @@
 				
 				<!--         Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-primary btn-update-email" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
 				</div>
 			</div>
@@ -301,12 +301,12 @@
 					<div class="form-group row m-0">
 						<div class="col-md-6 text-center">
 							<label class="radio-inline">
-								<input type="radio" name="flag" value="0"><i class="fa fa-lock mx-2"></i>Chỉ mình tôi
+								<input type="radio" name="flag-phonenumber" value="0"><i class="fa fa-lock mx-2"></i>Chỉ mình tôi
 							</label>
 						</div>
 						<div class="col-md-6 text-center">
 							<label class="radio-inline">
-								<input type="radio" name="flag" value="1"><i class="fa fa-users mx-2"></i>Bất kỳ ai
+								<input type="radio" name="flag-phonenumber" value="1"><i class="fa fa-users mx-2"></i>Bất kỳ ai
 							</label>
 						</div>
 					</div>
@@ -314,7 +314,7 @@
 				
 				<!--         Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-primary btn-update-phonenumber" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
 				</div>
 			</div>
@@ -331,7 +331,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>
+                    <p class="notification">
                         ------------------------
                     </p>
                 </div>
@@ -351,8 +351,15 @@
 			cursor: pointer;
 			color: blue;
 		}
+		
+		.fa.fa-lock {
+			font-size: 20px;
+		}
 	</style>
 </div>
 
+<th:block id="profile">
+   <script th:src="@{/assets/js/profile.js}"></script>
+</th:block>
 
 </html>

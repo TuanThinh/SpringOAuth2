@@ -10,7 +10,7 @@ jQuery(document).ready(function($) {
 				$.each(data, function(i, item) {
 					html += "<tr>";
 					html += '<td>' + item.clientId + '</td>';
-					html += '<td>'
+					html += '<td>';
 					var scopes = item.token.scope;
 					console.log(scopes);
 					$.each(scopes, function(i, scope){

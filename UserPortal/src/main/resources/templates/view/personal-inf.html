@@ -41,7 +41,7 @@
 				        <td><span class="gender"></span></td>
 				        <td></td>
 				      </tr>
-				      <tr class="row-password" data-toggle="modal" data-target="#modalPassword">
+				      <tr class="row-password" data-toggle="modal" data-target="#modalChangePassword">
 				        <td>Mật khẩu</td>
 				        <td><span class="password"></span></td>
 				        <td></td>
@@ -135,7 +135,7 @@
 				
 				<!--         Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-primary btn-update-fullname" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
 				</div>
 			</div>
@@ -161,15 +161,15 @@
 						<div class="col-md-4">
 							<select class="form-control edit-month">
 						        <option value="0">Tháng</option>
-						        <option value="1">Tháng 1</option>
-						        <option value="2">Tháng 2</option>
-						        <option value="3">Tháng 3</option>
-						        <option value="4">Tháng 4</option>
-						        <option value="5">Tháng 5</option>
-						        <option value="6">Tháng 6</option>
-						        <option value="7">Tháng 7</option>
-						        <option value="8">Tháng 8</option>
-						        <option value="9">Tháng 9</option>
+						        <option value="01">Tháng 1</option>
+						        <option value="02">Tháng 2</option>
+						        <option value="03">Tháng 3</option>
+						        <option value="04">Tháng 4</option>
+						        <option value="05">Tháng 5</option>
+						        <option value="06">Tháng 6</option>
+						        <option value="07">Tháng 7</option>
+						        <option value="08">Tháng 8</option>
+						        <option value="09">Tháng 9</option>
 						        <option value="10">Tháng 10</option>
 						        <option value="11">Tháng 11</option>
 						        <option value="12">Tháng 12</option>
@@ -183,7 +183,7 @@
 				
 				<!--         Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-primary btn-update-birthday" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
 				</div>
 			</div>
@@ -218,24 +218,24 @@
 				
 				<!--         Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-primary btn-update-gender" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<div class="modal" id="modalPassword" tabindex="-1" aria-labelledby="staticModalLabel" data-backdrop="static" aria-hidden="true">
+	<!-- <div class="modal" id="modalPassword" tabindex="-1" aria-labelledby="staticModalLabel" data-backdrop="static" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 
-				<!-- Modal Header -->
+				Modal Header
 				<div class="modal-header">
 					<h4 class="modal-title">Xác thực mật khẩu cũ</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 
-				<!-- Modal body -->
+				Modal body
 				<div class="modal-body">
 					<div class="form-group row">
 						<div class="col-md-4">
@@ -247,16 +247,16 @@
 					</div>
 				</div>
 				
-				<!--         Modal footer -->
+				        Modal footer
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Xác thực</button>
+					<button type="button" class="btn btn-primary btn-check-password" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Xác thực</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	
-	<div class="modal fade" id="modalChangePassword" tabindex="-1" aria-labelledby="staticModalLabel" data-backdrop="static" aria-hidden="true">
+	<div class="modal" id="modalChangePassword" tabindex="-1" aria-labelledby="staticModalLabel" data-backdrop="static" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 
@@ -270,10 +270,21 @@
 				<div class="modal-body">
 					<div class="form-group row">
 						<div class="col-md-4">
+							<label class="col-form-label">Mật khẩu của bạn</label>
+						</div>
+						<div class="col-md-8">
+							<input type="password" class="form-control ex-password" placeholder="*******">
+						</div>
+						<div class="offset-md-4 col-md-8 note-ex-password" style="height: 0px;">
+							<label class="col-form-label notify-ex-password p-0 text-danger"></label>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-md-4">
 							<label class="col-form-label">Mật khẩu mới</label>
 						</div>
 						<div class="col-md-8">
-							<input class="form-control edit-password" placeholder="">
+							<input type="password" class="form-control edit-password" placeholder="">
 						</div>
 					</div>
 					<div class="form-group row">
@@ -281,14 +292,14 @@
 							<label class="col-form-label">Nhập lại mật khẩu</label>
 						</div>
 						<div class="col-md-8">
-							<input class="form-control confirm-password" placeholder="">
+							<input type="password" class="form-control confirm-password" placeholder="">
 						</div>
 					</div>
 				</div>
 				
 				<!--         Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-primary btn-update-password">Cập nhật</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
 				</div>
 			</div>
@@ -319,7 +330,7 @@
 				
 				<!--         Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-primary btn-update-email" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
 				</div>
 			</div>
@@ -350,14 +361,14 @@
 				
 				<!--         Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-primary btn-update-phonenumber" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<div class="modal fade" id="thong-bao"tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+	<div class="modal" id="thong-bao"tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -367,7 +378,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>
+                    <p class="notification">
                         ------------------------
                     </p>
                 </div>

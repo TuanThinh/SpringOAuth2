@@ -14,4 +14,11 @@ public interface UserService {
 	String deleteById(String id);
 
 	InfoPersonal getInfoPersonal();
+	Boolean updateFullname(String firstName, String lastName);
+	Boolean updateBirthday(String birthday);
+	Boolean updateGender(String gender);
+	Boolean checkPassword(String exPassword);
+	Boolean updatePassword(String exPassword, String newPassword);
+	Boolean updateEmail(String email);
+	Boolean updatePhoneNumber(String phoneNumber);
 }
