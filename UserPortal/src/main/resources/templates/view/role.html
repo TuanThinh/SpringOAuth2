@@ -1,0 +1,272 @@
+<!doctype html>
+
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layouts/admin-layout :: main-fragment(~{::title}, ~{::pageTitle}, ~{::mainContent}, ~{::#role})}">
+
+<title>Dashboard</title>
+
+<div th:fragment="pageTitle">
+	<ol class="breadcrumb text-right">
+		<li class="active">Dashboard</li>
+	</ol>
+</div>
+
+<div th:fragment="mainContent">
+	<div class="row">
+		<div class="col-lg-5">
+			<button class="btn btn-primary" data-toggle="modal"
+				data-target="#add">Thiết lập Role</button>
+		</div>
+		<div class="col-lg-7 d-flex justify-content-end form-group">
+			<input class="col-lg-6 form-control" type="text"
+				placeholder="Tìm kiếm..." id="search-role" />
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-header">
+					<strong class="card-title">Danh sách các role</strong>
+				</div>
+				<div class="card-body">
+					<input type="hidden" class="id_role_select" value=""/>
+					<table class="table table-hover" id="table-role">
+						<thead>
+							<tr>
+								<th scope="col">Tên</th>
+								<th scope="col">Permissions</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>xxxxxxx</td>
+								<td>xxxxxxx</td>
+								<td><span data-toggle="modal" data-target="#modalDetail">
+										<i class="fa fa-tags " data-toggle="tooltip"
+										data-placement="top" title="Chi tiết"></i>
+								</span> | <span data-toggle="modal" data-target="#modalEdit">
+										<i class="fa fa-wrench text-primary" data-toggle="tooltip"
+										data-placement="top" title="Chỉnh sửa"></i>
+								</span> | <span data-toggle="modal" data-target="#modalDelete">
+										<i class="fa fa-times text-danger" data-toggle="tooltip"
+										data-placement="top" title="Xóa"></i>
+								</span></td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="modal fade" id="add" tabindex="-1"
+		aria-labelledby="staticModalLabel" data-backdrop="static"
+		aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Thiết lập Role</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					
+					<div class="row">
+						<div class="col-lg-12">
+							<p class="font-weight-bold mb-0">Tên</p>
+							<div class="col-lg-12">
+								<input class="form-control my-2 role-name" placeholder="Tên" />
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="font-weight-bold px-3">Permissions</div>
+						<div class="col-lg-12 p-3">
+							<input type="hidden" class="id_role_select" value="">
+							<table class="table table-hover" id="table-add-permission">
+								<thead>
+									<tr>
+										<th scope="col" width="50px"><input class="add-all" type="checkbox" /></th>
+										<th scope="col">Permissions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td>xxxxxxx</td>
+									</tr>
+		
+								</tbody>
+							</table>
+						</div>
+					</div>
+						
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary register-role" data-dismiss="modal"
+						data-toggle="modal" data-target="#thong-bao">Thiết lập</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modalDetail" tabindex="-1"
+		aria-labelledby="staticModalLabel" data-backdrop="static"
+		aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Chi tiết Role</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					
+					<div class="row">
+						<div class="col-lg-12">
+							<p class="font-weight-bold mb-0">Tên</p>
+							<div class="col-lg-12">
+								<input class="form-control my-2 detail-role-name" />
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-12">
+							<p class="font-weight-bold mb-0">Permissions</p>
+							<div class="col-lg-12">
+								<label class="my-2 detail-role-name" ></label>
+							</div>
+						</div>
+					</div>
+						
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modalEdit" tabindex="-1"
+		aria-labelledby="staticModalLabel" data-backdrop="static"
+		aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Cập nhật Role</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					
+					<div class="row">
+						<div class="col-lg-12">
+							<p class="font-weight-bold mb-0">Tên</p>
+							<div class="col-lg-12">
+								<input class="form-control my-2 edit-role-name" placeholder="Tên" />
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="font-weight-bold px-3">Permissions</div>
+						<div class="col-lg-12 p-3">
+							<!-- <input type="hidden" class="id_role_select" value=""> -->
+							<table class="table table-hover" id="table-edit-permission">
+								<thead>
+									<tr>
+										<th scope="col" width="50px"><input class="edit-all" type="checkbox" /></th>
+										<th scope="col">Permissions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td>xxxxxxx</td>
+									</tr>
+		
+								</tbody>
+							</table>
+						</div>
+					</div>
+						
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary update-role" data-dismiss="modal"
+						data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog"
+		aria-labelledby="SmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel">Xác nhận</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>Bạn có chắc muốn xóa item này không?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary delete-role" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Xóa</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="thong-bao" tabindex="-1" role="dialog"
+		aria-labelledby="SmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel">Thông báo</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p class="notification"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Thoát</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<th:block id="role">
+   <script th:src="@{/assets/js/role.js}"></script>
+</th:block>
+
+</html>

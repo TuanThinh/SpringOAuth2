@@ -62,5 +62,9 @@ public class UserInfShare implements Serializable {
 	public void setEmail(Map<String, String> email) {
 		this.email = email;
 	}
-	
+	public UserInfShare(String username) {
+		super();
+		this.username = username;
+	}
+	public UserInfShare() {}
 }

@@ -63,7 +63,7 @@ jQuery(document).ready(function($) {
 			client.clientSecret = $('.web-code').val();
 			client.redirectUris = $('.web-url').val();
 			$('.web-scopes .scope:checked').each(function(){
-				var scope = {}
+				var scope = {};
 				scope.id = $(this).val();
 				scopes.push(scope);
 			});

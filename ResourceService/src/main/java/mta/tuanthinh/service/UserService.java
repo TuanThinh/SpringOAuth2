@@ -21,4 +21,5 @@ public interface UserService {
 	Boolean updatePassword(String exPassword, String newPassword);
 	Boolean updateEmail(String email);
 	Boolean updatePhoneNumber(String phoneNumber);
+	User update(User user);
 }

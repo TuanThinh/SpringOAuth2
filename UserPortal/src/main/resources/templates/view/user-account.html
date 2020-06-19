@@ -1,0 +1,814 @@
+<!doctype html>
+
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layouts/admin-layout :: main-fragment(~{::title}, ~{::pageTitle}, ~{::mainContent}, ~{::#user-account})}">
+
+<title>Dashboard</title>
+
+<div th:fragment="pageTitle">
+	<ol class="breadcrumb text-right">
+		<li class="active">Dashboard</li>
+	</ol>
+</div>
+
+<div th:fragment="mainContent">
+	<div class="row">
+		<div class="col-lg-5">
+			<button class="btn btn-primary" data-toggle="modal"
+				data-target="#add">Thiết lập tài khoản</button>
+		</div>
+		<div class="col-lg-7 d-flex justify-content-end form-group">
+			<input class="col-lg-6 form-control" type="text"
+				placeholder="Tìm kiếm..." id="search-user" />
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-header">
+					<strong class="card-title">Danh sách các tài khoản</strong>
+				</div>
+				<div class="card-body">
+					<input type="hidden" class="id_user_select" value=""/>
+					<table class="table table-hover" id="table-account">
+						<thead>
+							<tr>
+								<th scope="col">Tài khoản</th>
+								<th scope="col">Enabled</th>
+								<th scope="col">Non-Expired</th>
+								<th scope="col">Credentials-Non-Expired</th>
+								<th scope="col">Non-Locked</th>
+								<th scope="col">Roles</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>xxxxxxx</td>
+								<td>xxxxxxx</td>
+								<td>xxxxxxx</td>
+								<td>xxxxxxx</td>
+								<td>xxxxxxx</td>
+								<td>xxxxxxx</td>
+								<td><span data-toggle="modal" data-target="#modalDetail">
+										<i class="fa fa-tags " data-toggle="tooltip"
+										data-placement="top" title="Chi tiết"></i>
+								</span> | <span data-toggle="modal" data-target="#modalEdit">
+										<i class="fa fa-wrench text-primary" data-toggle="tooltip"
+										data-placement="top" title="Chỉnh sửa"></i>
+								</span> | <span data-toggle="modal" data-target="#modalDelete">
+										<i class="fa fa-times text-danger" data-toggle="tooltip"
+										data-placement="top" title="Xóa"></i>
+								</span></td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="add" tabindex="-1"
+		aria-labelledby="staticModalLabel" data-backdrop="static"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Thiết lập tài khoản</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-6 font-weight-bold">Thông tin tài khoản <hr class="m-2"></div>
+						<div class="col-lg-6 font-weight-bold">Thông tin người dùng <hr class="m-2"></div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Tài khoản</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 username" placeholder="Tên đăng nhập" />
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Họ</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 first-name" placeholder="Họ" />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Mật khẩu</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 password"  />
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Tên</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 last-name" placeholder="Tên" />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Enabled</p>
+								<div class="col-lg-12" style="line-height: 46px;">
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="enabled" value="1" checked="checked"> <span class="ml-2">Enabled</span>
+										</label>
+									</div>
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="enabled" value="0"><span class="ml-2">Disable</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Ngày sinh</p>
+								<div class="col-lg-12">
+									<div class="col-lg-4">
+										<input class="form-control day" placeholder="Ngày">
+									</div>
+									<div class="col-lg-5 pl-0">
+										<select class="form-control month">
+									        <option value="0">Tháng</option>
+									        <option value="01">Tháng 1</option>
+									        <option value="02">Tháng 2</option>
+									        <option value="03">Tháng 3</option>
+									        <option value="04">Tháng 4</option>
+									        <option value="05">Tháng 5</option>
+									        <option value="06">Tháng 6</option>
+									        <option value="07">Tháng 7</option>
+									        <option value="08">Tháng 8</option>
+									        <option value="09">Tháng 9</option>
+									        <option value="10">Tháng 10</option>
+									        <option value="11">Tháng 11</option>
+									        <option value="12">Tháng 12</option>
+									     </select>
+									</div>
+									<div class="col-lg-3 pl-0">
+										<input class="form-control year" placeholder="Năm">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Expired</p>
+								<div class="col-lg-12" style="line-height: 46px;">
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="expired" value="0"><span class="ml-2">Expired</span>
+										</label>
+									</div>
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="expired" value="1" checked="checked"><span class="ml-2">Non-Expired</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Giới tính</p>
+								<div class="col-lg-12" style="line-height: 46px;">
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="gender" value="0" checked="checked"><span class="ml-2">Nam</span>
+										</label>
+									</div>
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="gender" value="1"><span class="ml-2">Nữ</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Credentials-Expired</p>
+								<div class="col-lg-12" style="line-height: 46px;">
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="credentials-expired" value="0"><span class="ml-2">Expired</span>
+										</label>
+									</div>
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="credentials-expired" value="1" checked="checked"><span class="ml-2">Non-Expired</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Số điện thoại</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 phonenumber" placeholder="Số điện thoại" />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Locked</p>
+								<div class="col-lg-12" style="line-height: 46px;">
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="locked" value="0"><span class="ml-2">Locked</span>
+										</label>
+									</div>
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="locked" value="1" checked="checked"><span class="ml-2">Non-Locked</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Email</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 email" placeholder="Email" />
+								</div>
+							</div>
+						</div>
+					</div>
+						
+
+					<div class="row">
+						<div class="font-weight-bold px-3">Cấu hình role</div>
+						<div class="col-lg-12 p-3">
+							<input type="hidden" class="id_role_select" value="">
+							<table class="table table-hover table-role" id="table-add-role">
+								<thead>
+									<tr>
+										<th scope="col" width="50px"><input class="add-all" type="checkbox" /></th>
+										<th scope="col">Role</th>
+										<th scope="col">Permissions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td>xxxxxxx</td>
+										<td>xxxxxxx</td>
+										<td>xxxxxxx</td>
+									</tr>
+		
+								</tbody>
+							</table>
+						</div>
+					</div>
+						
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary register-user" data-dismiss="modal"
+						data-toggle="modal" data-target="#thong-bao">Thiết lập</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modalDetail" tabindex="-1"
+		aria-labelledby="staticModalLabel" data-backdrop="static"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Chi tiết tài khoản</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-6 font-weight-bold">Thông tin tài khoản <hr class="m-2"></div>
+						<div class="col-lg-6 font-weight-bold">Thông tin người dùng <hr class="m-2"></div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Tài khoản</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 detail-username" disabled="disabled" />
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Họ</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 detail-first-name" disabled="disabled"/>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Mật khẩu</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 password" value="***********"  disabled="disabled"/>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Tên</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 detail-last-name" disabled="disabled" />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Enabled</p>
+								<div class="col-lg-12" style="line-height: 46px;">
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="detail-enabled" value="1" disabled="disabled"> <span class="ml-2">Enabled</span>
+										</label>
+									</div>
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="detail-enabled" value="0" disabled="disabled"><span class="ml-2">Disable</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Ngày sinh</p>
+								<div class="col-lg-12">
+									<div class="col-lg-4">
+										<input class="form-control detail-day" disabled="disabled">
+									</div>
+									<div class="col-lg-5 pl-0">
+										<input class="form-control detail-month" disabled="disabled">
+									</div>
+									<div class="col-lg-3 pl-0">
+										<input class="form-control detail-year" disabled="disabled">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Expired</p>
+								<div class="col-lg-12" style="line-height: 46px;">
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="detail-expired" value="0" disabled="disabled"><span class="ml-2">Expired</span>
+										</label>
+									</div>
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="detail-expired" value="1" disabled="disabled"><span class="ml-2">Non-Expired</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Giới tính</p>
+								<div class="col-lg-12" style="line-height: 46px;">
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="detail-gender" value="0" disabled="disabled"><span class="ml-2">Nam</span>
+										</label>
+									</div>
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="detail-gender" value="1" disabled="disabled"><span class="ml-2">Nữ</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Credentials-Expired</p>
+								<div class="col-lg-12" style="line-height: 46px;">
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="detail-credentials-expired" value="0" disabled="disabled"><span class="ml-2">Expired</span>
+										</label>
+									</div>
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="detail-credentials-expired" value="1" disabled="disabled"><span class="ml-2">Non-Expired</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Số điện thoại</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 detail-phonenumber" disabled="disabled" />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Locked</p>
+								<div class="col-lg-12" style="line-height: 46px;">
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="detail-locked" value="0" disabled="disabled"><span class="ml-2">Locked</span>
+										</label>
+									</div>
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="detail-locked" value="1" disabled="disabled"><span class="ml-2">Non-Locked</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Email</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 detail-email" disabled="disabled" />
+								</div>
+							</div>
+						</div>
+					</div>
+						
+
+					<div class="row">
+						<div class="font-weight-bold px-3">Role</div>
+						<div class="col-lg-12 p-3">
+							<input type="hidden" class="id_role_select" value="">
+							<table class="table table-hover" id="table-detail">
+								<thead>
+									<tr>
+										<th scope="col">Role</th>
+										<th scope="col">Permissions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>xxxxxxx</td>
+										<td>xxxxxxx</td>
+									</tr>
+		
+								</tbody>
+							</table>
+						</div>
+					</div>
+						
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modalEdit" tabindex="-1"
+		aria-labelledby="staticModalLabel" data-backdrop="static"
+		aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Cập nhật tài khoản</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-6 font-weight-bold">Thông tin tài khoản <hr class="m-2"></div>
+						<div class="col-lg-6 font-weight-bold">Thông tin người dùng <hr class="m-2"></div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Tài khoản</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 edit-username" disabled="disabled"/>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Họ</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 edit-first-name" placeholder="Họ" />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Mật khẩu</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 edit-password" placeholder="Enter value to change" />
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Tên</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 edit-last-name" placeholder="Tên" />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Enabled</p>
+								<div class="col-lg-12" style="line-height: 46px;">
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="edit-enabled" value="1"> <span class="ml-2">Enabled</span>
+										</label>
+									</div>
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="edit-enabled" value="0"><span class="ml-2">Disable</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Ngày sinh</p>
+								<div class="col-lg-12">
+									<div class="col-lg-4">
+										<input class="form-control edit-day" placeholder="Ngày">
+									</div>
+									<div class="col-lg-5 pl-0">
+										<select class="form-control edit-month">
+									        <option value="0">Tháng</option>
+									        <option value="01">Tháng 1</option>
+									        <option value="02">Tháng 2</option>
+									        <option value="03">Tháng 3</option>
+									        <option value="04">Tháng 4</option>
+									        <option value="05">Tháng 5</option>
+									        <option value="06">Tháng 6</option>
+									        <option value="07">Tháng 7</option>
+									        <option value="08">Tháng 8</option>
+									        <option value="09">Tháng 9</option>
+									        <option value="10">Tháng 10</option>
+									        <option value="11">Tháng 11</option>
+									        <option value="12">Tháng 12</option>
+									     </select>
+									</div>
+									<div class="col-lg-3 pl-0">
+										<input class="form-control edit-year" placeholder="Năm">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Expired</p>
+								<div class="col-lg-12" style="line-height: 46px;">
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="edit-expired" value="0"><span class="ml-2">Expired</span>
+										</label>
+									</div>
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="edit-expired" value="1"><span class="ml-2">Non-Expired</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Giới tính</p>
+								<div class="col-lg-12" style="line-height: 46px;">
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="edit-gender" value="0"><span class="ml-2">Nam</span>
+										</label>
+									</div>
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="edit-gender" value="1"><span class="ml-2">Nữ</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Credentials-Expired</p>
+								<div class="col-lg-12" style="line-height: 46px;">
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="edit-credentials-expired" value="0"><span class="ml-2">Expired</span>
+										</label>
+									</div>
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="edit-credentials-expired" value="1"><span class="ml-2">Non-Expired</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Số điện thoại</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 edit-phonenumber" placeholder="Số điện thoại" />
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Locked</p>
+								<div class="col-lg-12" style="line-height: 46px;">
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="edit-locked" value="0"><span class="ml-2">Locked</span>
+										</label>
+									</div>
+									<div class="col-md-6 text-center">
+										<label class="radio-inline">
+											<input type="radio" name="edit-locked" value="1"><span class="ml-2">Non-Locked</span>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="col-lg-12">
+								<p class="font-weight-bold mb-0">Email</p>
+								<div class="col-lg-12">
+									<input class="form-control my-2 edit-email" placeholder="Email" />
+								</div>
+							</div>
+						</div>
+					</div>
+						
+
+					<div class="row">
+						<div class="font-weight-bold px-3">Cấu hình role</div>
+						<div class="col-lg-12 p-3">
+							<input type="hidden" class="id_role_select" value="">
+							<table class="table table-hover table-role" id="table-edit-role">
+								<thead>
+									<tr>
+										<th scope="col" width="50px"><input class="edit-all" type="checkbox" /></th>
+										<th scope="col">Role</th>
+										<th scope="col">Permissions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td>xxxxxxx</td>
+										<td>xxxxxxx</td>
+										<td>xxxxxxx</td>
+									</tr>
+		
+								</tbody>
+							</table>
+						</div>
+					</div>
+						
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary update-user" data-dismiss="modal"
+						data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog"
+		aria-labelledby="SmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel">Xác nhận</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>Bạn có chắc muốn xóa item này không?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary delete-user" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Xóa</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="thong-bao" tabindex="-1" role="dialog"
+		aria-labelledby="SmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel">Thông báo</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p class="notification"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Thoát</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<th:block id="user-account">
+   <script th:src="@{/assets/js/user-account.js}"></script>
+</th:block>
+
+</html>

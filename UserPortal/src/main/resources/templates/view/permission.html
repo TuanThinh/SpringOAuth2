@@ -1,0 +1,178 @@
+<!doctype html>
+
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{layouts/admin-layout :: main-fragment(~{::title}, ~{::pageTitle}, ~{::mainContent}, ~{::#permission})}">
+
+<title>Dashboard</title>
+
+<div th:fragment="pageTitle">
+	<ol class="breadcrumb text-right">
+		<li class="active">Dashboard</li>
+	</ol>
+</div>
+
+<div th:fragment="mainContent">
+	<div class="row">
+		<div class="col-lg-5">
+			<button class="btn btn-primary" data-toggle="modal"
+				data-target="#add">Thiết lập Permission</button>
+		</div>
+		<div class="col-lg-7 d-flex justify-content-end form-group">
+			<input class="col-lg-6 form-control" type="text"
+				placeholder="Tìm kiếm..." id="search-permission" />
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-header">
+					<strong class="card-title">Danh sách các permission</strong>
+				</div>
+				<div class="card-body">
+					<input type="hidden" class="id_select" value=""/>
+					<table class="table table-hover" id="table-permission">
+						<thead>
+							<tr>
+								<th scope="col">Tên</th>
+								<th scope="col"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>xxxxxxx</td>
+								<td><span data-toggle="modal" data-target="#modalEdit">
+										<i class="fa fa-wrench text-primary" data-toggle="tooltip"
+										data-placement="top" title="Chỉnh sửa"></i>
+								</span> | <span data-toggle="modal" data-target="#modalDelete">
+										<i class="fa fa-times text-danger" data-toggle="tooltip"
+										data-placement="top" title="Xóa"></i>
+								</span></td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="modal fade" id="add" tabindex="-1"
+		aria-labelledby="staticModalLabel" data-backdrop="static"
+		aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Thiết lập permission</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group row">
+						<div class="offset-md-2">
+							<label class="col-form-label">Tên</label>
+						</div>
+						<div class="col-md-7">
+							<input class="form-control add-name" placeholder="Tên...">
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary register-permission" data-dismiss="modal"
+						data-toggle="modal" data-target="#thong-bao">Thiết lập</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="modal fade" id="modalEdit" tabindex="-1"
+		aria-labelledby="staticModalLabel" data-backdrop="static"
+		aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Cập nhật</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group row">
+						<div class="offset-md-2">
+							<label class="col-form-label">Tên</label>
+						</div>
+						<div class="col-md-7">
+							<input class="form-control edit-name" placeholder="Tên...">
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary update-permission" data-dismiss="modal"
+						data-toggle="modal" data-target="#thong-bao">Cập nhật</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modalDelete" tabindex="-1" role="dialog"
+		aria-labelledby="SmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel">Xác nhận</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p>Bạn có chắc muốn xóa item này không?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary delete-permission" data-dismiss="modal" data-toggle="modal" data-target="#thong-bao">Xóa</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Thoát</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="thong-bao" tabindex="-1" role="dialog"
+		aria-labelledby="SmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="smallmodalLabel">Thông báo</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<p class="notification"></p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Thoát</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<th:block id="permission">
+   <script th:src="@{/assets/js/permission.js}"></script>
+</th:block>
+
+</html>

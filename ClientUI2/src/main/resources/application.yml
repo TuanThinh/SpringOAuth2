@@ -1,0 +1,20 @@
+server:
+  port: 9000
+  servlet:
+    session:
+      cookie:
+        name: UISESSION
+security:
+  oauth2:
+    client:
+      client-id: mobile
+      client-secret: 12345
+      user-authorization-uri: http://localhost:8080/oauth/authorize
+      access-token-uri: http://localhost:8080/oauth/token
+    resource:
+      token-info-uri: http://localhost:8080/oauth/check_token
+logging:
+  level:
+    org:
+      hibernate:
+        type: DEBUG

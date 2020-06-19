@@ -1,12 +1,20 @@
 package mta.tuanthinh.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import mta.tuanthinh.document.User;
 import mta.tuanthinh.dto.InfoPersonal;
 import mta.tuanthinh.service.UserService;
 
@@ -15,6 +23,31 @@ import mta.tuanthinh.service.UserService;
 public class UserApi {
 	@Autowired
 	private UserService userService;
+	
+	@GetMapping("/all")
+	public List<User> findAll() {
+		return userService.findAll();
+	}
+	
+	@GetMapping("/id/{id}")
+	public User findById(@PathVariable String id) {
+		return userService.findById(id).get();
+	}
+	
+	@PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=utf-8")
+	public User updateUser(@RequestBody User user) {
+		return userService.update(user);
+	}
+	
+	@PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE + ";charset=utf-8")
+	public User addUser(@RequestBody User user) {
+		return userService.save(user);
+	}
+
+	@DeleteMapping("/delete/{id}")
+	public String deleteById(@PathVariable String id) {
+		return userService.deleteById(id);
+	}
 	
 	@GetMapping("/personal-inf")
 	public InfoPersonal getInfoPersonal() {

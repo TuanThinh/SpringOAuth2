@@ -46,6 +46,11 @@ public class MainController {
 		return "redirect:/";
 	}
 	
+	@GetMapping(value="/403")
+	public String accessDenie() {
+		return "view/403";
+	}
+	
 	@GetMapping(value="/personal-inf")
 	public String personal() {
 		return "view/personal-inf";
@@ -66,4 +71,23 @@ public class MainController {
 		return "view/oauth-client";
 	}
 	
+	@GetMapping(value="/account")
+	public String account() {
+		return "view/user-account";
+	}
+	
+	@GetMapping(value="/role")
+	public String role() {
+		return "view/role";
+	}
+	
+	@GetMapping(value="/permission")
+	public String permission() {
+		return "view/permission";
+	}
+	
+	@GetMapping(value="/scope")
+	public String scope() {
+		return "view/scope";
+	}
 }

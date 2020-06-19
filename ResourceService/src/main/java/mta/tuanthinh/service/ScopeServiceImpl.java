@@ -32,7 +32,7 @@ public class ScopeServiceImpl implements ScopeService{
 
 	@Override
 	public Scope save(Scope scope) {
-		return scopeRepository.insert(scope);
+		return scopeRepository.save(scope);
 	}
 
 	@Override

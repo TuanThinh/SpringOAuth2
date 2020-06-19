@@ -28,7 +28,7 @@ import mta.tuanthinh.utility.Utilities;
 
 @RestController
 @RequestMapping("/api")
-public class API {
+public class PersonalInfApi {
 	@Autowired
 	RestTemplate restTemplate;
 	

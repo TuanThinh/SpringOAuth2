@@ -23,7 +23,7 @@ import mta.tuanthinh.utility.Utilities;
 
 @RestController
 @RequestMapping("/api/scope")
-public class ScopeController {
+public class ScopeApi {
 	
 	@Autowired
 	RestTemplate restTemplate;
@@ -73,7 +73,7 @@ public class ScopeController {
 	public String deleteById(@PathVariable String id) {
 		String url = "http://localhost:8181/scope/delete/{id}";
 		HttpEntity<String> entity = new HttpEntity<String>(Utilities.getHeader());
-		ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, String.class, id);
+		ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.DELETE, entity, String.class, id);
 		return responseEntity.getBody();
 	}
 }
