@@ -105,7 +105,7 @@ public class UserServiceImpl implements UserService{
 		User user = findByUsername(username).get();
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
-		return save(user)!=null?true:false;
+		return userRepository.save(user)!=null?true:false;
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService{
 		String username = Utilities.getCurrentUser();
 		User user = findByUsername(username).get();
 		user.setBirthday(birthday);
-		return save(user)!=null?true:false;
+		return userRepository.save(user)!=null?true:false;
 	}
 
 	@Override
@@ -121,7 +121,7 @@ public class UserServiceImpl implements UserService{
 		String username = Utilities.getCurrentUser();
 		User user = findByUsername(username).get();
 		user.setGender(gender);
-		return save(user)!=null?true:false;
+		return userRepository.save(user)!=null?true:false;
 	}
 
 	@Override
@@ -139,7 +139,7 @@ public class UserServiceImpl implements UserService{
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		if(passwordEncoder.matches(exPassword, user.getPassword())) {
 			user.setPassword(passwordEncoder.encode(newPassword));
-			return save(user)!=null?true:false;
+			return userRepository.save(user)!=null?true:false;
 		}
 		return false;
 		
@@ -150,7 +150,7 @@ public class UserServiceImpl implements UserService{
 		String username = Utilities.getCurrentUser();
 		User user = findByUsername(username).get();
 		user.setEmail(email);
-		return save(user)!=null?true:false;
+		return userRepository.save(user)!=null?true:false;
 	}
 
 	@Override
@@ -158,7 +158,7 @@ public class UserServiceImpl implements UserService{
 		String username = Utilities.getCurrentUser();
 		User user = findByUsername(username).get();
 		user.setPhoneNumber(phoneNumber);
-		return save(user)!=null?true:false;
+		return userRepository.save(user)!=null?true:false;
 	}
 
 }

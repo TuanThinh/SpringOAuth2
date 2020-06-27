@@ -3,6 +3,7 @@ package mta.tuanthinh.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import mta.tuanthinh.document.UserInfShare;
+import mta.tuanthinh.dto.InfShare;
 import mta.tuanthinh.service.UserInfShareService;
 
 @RestController
@@ -31,6 +33,18 @@ public class UserInfShareApi {
 	@GetMapping("/current-profile")
 	public UserInfShare getProfileForCurretUser() {
 		return userInfShareService.getProfileForCurrentUser();
+	}
+	
+	@PreAuthorize("#oauth2.hasScope('READ_PROFILE')")
+	@GetMapping("/inf-share")
+	public InfShare getInfShare() {
+		return userInfShareService.getInfShare();
+	}
+	
+	@PreAuthorize("#oauth2.hasScope('READ_EMAIL')")
+	@GetMapping("/email-share")
+	public String getEmailShare() {
+		return userInfShareService.getEmailShare();
 	}
 	
 	@PostMapping("/add")

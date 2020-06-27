@@ -48,7 +48,7 @@ public class RoleApi {
 	
 	@PutMapping("/update")
 	public Role update(@RequestBody Role role) {
-		return roleService.save(role);
+		return roleService.update(role);
 	}
 	
 	@DeleteMapping("/delete/{id}")

@@ -13,4 +13,5 @@ public interface RoleService {
 	String deleteById(String id);
 	
 	List<Role> findByIdPermission(String idPermission);
+	Role update(Role role);
 }

@@ -24,8 +24,8 @@ public class OAuthClientDetails implements ClientDetails{
 	@Field(name = "username")
 	private String username;
 
-	@Field(name = "client_id")
-    private String clientId;
+	@Field(name = "client_name")
+    private String clientName;
 
 	@Field(name = "client_secret")
     private String clientSecret;
@@ -53,7 +53,7 @@ public class OAuthClientDetails implements ClientDetails{
 
 	@Override
 	public String getClientId() {
-		return clientId;
+		return id;
 	}
 
 	@Override
@@ -115,7 +115,10 @@ public class OAuthClientDetails implements ClientDetails{
 
 	@Override
 	public boolean isAutoApprove(String scope) {
-		return true;
+		if(id.equals("5e4c0153d066b209d86f50b5")) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -135,11 +138,15 @@ public class OAuthClientDetails implements ClientDetails{
 		this.username = username;
 	}
 
-	public void setClientId(String clientId) {
-        this.clientId = clientId;
+	public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
-    public void setClientSecret(String clientSecret) {
+    public String getClientName() {
+		return clientName;
+	}
+
+	public void setClientSecret(String clientSecret) {
         this.clientSecret = clientSecret;
     }
 

@@ -60,6 +60,59 @@ public class OauthClientDetailsServiceImpl implements OAuthClientDetailsService{
 	}
 	
 	@Override
+	public OAuthClientDetails saveAppForCurrentUser(String app) {
+		String username = Utilities.getCurrentUser();
+		OAuthClientDetails oauthClientDetails = new OAuthClientDetails();
+		
+		oauthClientDetails.setClientName(app);
+		
+		if(oauthClientDetails.getAccessTokenValidity() == null) {
+			oauthClientDetails.setAccessTokenValidity(10000);
+		}
+		if(oauthClientDetails.getRefreshTokenValidity() == null) {
+			oauthClientDetails.setRefreshTokenValidity(10000);
+		}
+		if(oauthClientDetails.getGrantTypes() == null) {
+			oauthClientDetails.setGrantTypes("authorization_code,password,refresh_token,implicit");
+		}
+		if(oauthClientDetails.getUsername() == null) {
+			oauthClientDetails.setUsername(username);
+		}
+		
+		String random = Utilities.getAlphaNumericString(20);
+		oauthClientDetails.setAdditionalInformation(random);
+		String encoded = new BCryptPasswordEncoder().encode(random);
+		oauthClientDetails.setClientSecret(encoded);
+		
+		return OAuthClientDetailsRepository.save(oauthClientDetails);
+	}
+	
+	@Override
+	public OAuthClientDetails updateAppForCurrentUser(OAuthClientDetails oauthClientDetails) {
+		Optional<OAuthClientDetails> optional = findById(oauthClientDetails.getId());
+		optional.orElseThrow(() -> new UsernameNotFoundException("Username or password wrong"));
+		OAuthClientDetails app = optional.get();
+		
+		if(oauthClientDetails.getRedirectUris() != null) {
+			app.setRedirectUris(oauthClientDetails.getRedirectUris());
+		}
+		if(oauthClientDetails.getScopes() != null) {
+			List<Scope> listScope = new ArrayList<>();
+			oauthClientDetails.getScopes().forEach(i -> {
+				Scope scope = scopeRepository.findById(i.getId()).get();
+				listScope.add(scope);
+			});
+			app.setScopes(listScope);
+		}
+		String random = oauthClientDetails.getClientSecret();
+		app.setAdditionalInformation(random);
+		String encoded = new BCryptPasswordEncoder().encode(random);
+		app.setClientSecret(encoded);
+		
+		return OAuthClientDetailsRepository.save(app);
+	}
+	
+	@Override
 	public OAuthClientDetails saveClientForCurrentUser(OAuthClientDetails oauthClientDetails) {
 		String username = Utilities.getCurrentUser();
 		if(oauthClientDetails.getAccessTokenValidity() == null) {
@@ -96,8 +149,8 @@ public class OauthClientDetailsServiceImpl implements OAuthClientDetailsService{
 		optional.orElseThrow(() -> new UsernameNotFoundException("Username or password wrong"));
 		OAuthClientDetails client = optional.get();
 		
-		if(oauthClientDetails.getClientId() != null && oauthClientDetails.getClientId() != "") {
-			client.setClientId(oauthClientDetails.getClientId());
+		if(oauthClientDetails.getClientName() != null && oauthClientDetails.getClientName() != "") {
+			client.setClientName(oauthClientDetails.getClientName());
 		}
 		if(oauthClientDetails.getClientSecret() != null && !oauthClientDetails.getClientSecret().equals("")) {
 //			PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();

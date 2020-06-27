@@ -6,7 +6,7 @@ public class OAuthClientDetails {
 	
     private String id;
 	private String username;
-    private String clientId;
+    private String clientName;
     private String clientSecret;
     private String grantTypes;
     private List<Scope> scopes;
@@ -32,12 +32,12 @@ public class OAuthClientDetails {
 		this.username = username;
 	}
 
-	public String getClientId() {
-		return clientId;
+	public String getClientName() {
+		return clientName;
 	}
 
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
 	}
 
 	public String getClientSecret() {

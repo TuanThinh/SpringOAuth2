@@ -7,8 +7,8 @@ server:
 security:
   oauth2:
     client:
-      client-id: noname
-      client-secret: 12345
+      client-id: 5ef0878d63f4c734c92edac8
+      client-secret: hxf5eHsPcA9sPxpbDfcb
       user-authorization-uri: http://localhost:8080/oauth/authorize
       access-token-uri: http://localhost:8080/oauth/token
     resource:

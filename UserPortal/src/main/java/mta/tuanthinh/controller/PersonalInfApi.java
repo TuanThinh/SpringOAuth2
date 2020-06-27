@@ -188,6 +188,21 @@ public class PersonalInfApi {
 		return getListClient;
 	}
 	
+	@GetMapping("/register-app/{app}")
+	public OAuthClientDetails registerApp(@PathVariable String app) {
+		String url = "http://localhost:8181/oauth-client/register-app/{app}";
+		HttpEntity<String> entity = new HttpEntity<String>(app, Utilities.getHeader());
+		ResponseEntity<OAuthClientDetails> responseEntity = restTemplate.exchange(url, HttpMethod.GET, entity, OAuthClientDetails.class, app);
+		return responseEntity.getBody();
+	}
+	@PutMapping("/update-app")
+	public OAuthClientDetails updateApp(@RequestBody OAuthClientDetails oAuthClientDetails) {
+		String url = "http://localhost:8181/oauth-client/update-app";
+		HttpEntity<OAuthClientDetails> entity = new HttpEntity<OAuthClientDetails>(oAuthClientDetails, Utilities.getHeader());
+		ResponseEntity<OAuthClientDetails> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, entity, OAuthClientDetails.class);
+		return responseEntity.getBody();
+	}
+	
 	@PostMapping("/client-register")
 	public OAuthClientDetails registerClient(@RequestBody OAuthClientDetails client) {
 		String url = "http://localhost:8181/oauth-client/client-register";

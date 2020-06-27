@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import mta.tuanthinh.document.UserInfShare;
+import mta.tuanthinh.dto.InfShare;
 
 public interface UserInfShareService {
 	List<UserInfShare> findAll();
@@ -19,4 +20,6 @@ public interface UserInfShareService {
 	Boolean updateEmail(String email, String flag);
 	Boolean updatePhoneNumber(String phoneNumber, String flag);
 	
+	InfShare getInfShare();
+	String getEmailShare();
 }

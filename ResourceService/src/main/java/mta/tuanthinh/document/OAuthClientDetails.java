@@ -15,8 +15,8 @@ public class OAuthClientDetails {
 	@Field(name = "username")
 	private String username;
 
-	@Field(name = "client_id")
-    private String clientId;
+	@Field(name = "client_name")
+    private String clientName;
 
 	@Field(name = "client_secret")
     private String clientSecret;
@@ -58,12 +58,12 @@ public class OAuthClientDetails {
 		this.username = username;
 	}
 
-	public String getClientId() {
-		return clientId;
+	public String getClientName() {
+		return clientName;
 	}
 
-	public void setClientId(String clientId) {
-		this.clientId = clientId;
+	public void setClientName(String clientName) {
+		this.clientName = clientName;
 	}
 
 	public String getClientSecret() {

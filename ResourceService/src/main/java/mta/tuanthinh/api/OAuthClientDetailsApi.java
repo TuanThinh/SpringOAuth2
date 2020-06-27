@@ -58,6 +58,15 @@ public class OAuthClientDetailsApi {
 	public List<OAuthClientDetails> getListOAuthClient(){
 		return oAuthClientDetailsService.getClientForCurrentUser();
 	}
+
+	@GetMapping("/register-app/{app}")
+	public OAuthClientDetails addAppForCurrentUser(@PathVariable String app) {
+		return oAuthClientDetailsService.saveAppForCurrentUser(app);
+	}
+	@PutMapping("/update-app")
+	public OAuthClientDetails updateAppForCurrentUser(@RequestBody OAuthClientDetails oAuthClientDetails) {
+		return oAuthClientDetailsService.updateAppForCurrentUser(oAuthClientDetails);
+	}
 	
 	@PostMapping("/client-register")
 	public OAuthClientDetails addClientForCurrentUser(@RequestBody OAuthClientDetails oAuthClientDetails) {

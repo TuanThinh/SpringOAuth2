@@ -18,8 +18,8 @@ public class OAuthClientDetailsService implements ClientDetailsService{
     }
 
 	@Override
-	public ClientDetails loadClientByClientId(String clientId) throws ClientRegistrationException {
-		return oauthClientDetailsRepository.findByClientId(clientId).orElseThrow(IllegalArgumentException::new);
+	public ClientDetails loadClientByClientId(String id) throws ClientRegistrationException {
+		return oauthClientDetailsRepository.findById(id).orElseThrow(IllegalArgumentException::new);
 	}
 
 }

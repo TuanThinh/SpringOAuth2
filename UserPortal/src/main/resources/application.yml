@@ -7,7 +7,7 @@ server:
 security:
   oauth2:
     client:
-      client-id: portal
+      client-id: 5e4c0153d066b209d86f50b5
       client-secret: 12345
       user-authorization-uri: http://localhost:8080/oauth/authorize
       access-token-uri: http://localhost:8080/oauth/token

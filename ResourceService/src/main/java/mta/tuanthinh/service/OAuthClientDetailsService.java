@@ -15,4 +15,6 @@ public interface OAuthClientDetailsService {
 	List<OAuthClientDetails> getClientForCurrentUser();
 	OAuthClientDetails saveClientForCurrentUser(OAuthClientDetails authClientDetails);
 	OAuthClientDetails updateClientForCurrentUser(OAuthClientDetails authClientDetails);
+	OAuthClientDetails saveAppForCurrentUser(String app);
+	OAuthClientDetails updateAppForCurrentUser(OAuthClientDetails oauthClientDetails);
 }

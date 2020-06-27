@@ -14,7 +14,7 @@ security:
     resource:
       token-info-uri: http://localhost:8080/oauth/check_token
     client:
-      client-id: resource
+      client-id: 5e8dceae6c3ad709c0519179
       client-secret: 12345
 logging:
   level:

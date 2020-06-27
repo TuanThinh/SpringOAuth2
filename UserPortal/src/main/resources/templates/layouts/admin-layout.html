@@ -4,7 +4,8 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html xmlns:th="http://www.thymeleaf.org"
-	th:fragment="main-fragment (title, pageTitle, mainContent, otherStaticResources)">
+	th:fragment="main-fragment (title, pageTitle, mainContent, otherStaticResources)"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<meta charset="UTF-8" />
 	<title th:replace="${title} ?: ~{}">Page Title</title>
@@ -40,25 +41,25 @@
                     <li class="active">
                         <a th:href="@{/}"> <i class="menu-icon fa fa-dashboard"></i>Trang chủ </a>
                     </li>
-                    <li class="active">
+                    <li sec:authorize="hasRole('ROLE_ManageProfile')" class="active">
                         <a th:href="@{/personal-inf}"> <i class="menu-icon fa fa-user"></i>Thông tin cá nhân </a>
                     </li>
-                    <li class="active">
+                    <li sec:authorize="hasRole('ROLE_AuthoritedApplication')" class="active">
                         <a th:href="@{/applications}"> <i class="menu-icon fa fa-check-square"></i>Ứng dụng ủy quyền </a>
                     </li>
-                    <li class="active">
+                    <li sec:authorize="hasRole('ROLE_RegisterApplication')" class="active">
                         <a th:href="@{/oauth}"> <i class="menu-icon fa fa-bolt"></i>Đăng nhập bằng OAuth </a>
                     </li>
-                    <li class="active">
+                    <li sec:authorize="hasRole('ROLE_ManageUser')" class="active">
                         <a th:href="@{/account}"> <i class="menu-icon fa fa-user-md"></i>Quản lý tài khoản </a>
                     </li>
-                    <li class="active">
+                    <li sec:authorize="hasRole('ROLE_ManageRole')" class="active">
                         <a th:href="@{/role}"> <i class="menu-icon fa fa-xing"></i>Quản lý Role </a>
                     </li>
-                    <li class="active">
+                    <li sec:authorize="hasRole('ROLE_ManagePermission')" class="active">
                         <a th:href="@{/permission}"> <i class="menu-icon fa fa-vk"></i>Quản lý Permissions </a>
                     </li>
-                    <li class="active">
+                    <li sec:authorize="hasRole('ROLE_ManageScope')" class="active">
                         <a th:href="@{/scope}"> <i class="menu-icon fa fa-pagelines"></i>Quản lý Scopes </a>
                     </li>
                 </ul>

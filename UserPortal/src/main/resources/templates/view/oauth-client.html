@@ -27,25 +27,21 @@
 		<div class="col-lg-12">
 			<div class="card">
 				<div class="card-header">
-					<strong class="card-title">Những trang web mà bạn đăng ký
-						có thể truy cập bằng tài khoản OAuth</strong>
+					<strong class="card-title">Danh sách các ứng dụng</strong>
 				</div>
 				<div class="card-body">
 					<input type="hidden" class="id_select" value=""/>
+					<input type="hidden" class="id_code" value=""/>
 					<table class="table table-hover" id="table-client">
 						<thead>
 							<tr>
-								<th scope="col">Tên</th>
-								<th scope="col">Mã bảo mật</th>
-								<th scope="col">URL</th>
-								<th scope="col">Scope</th>
+								<th scope="col">ID ứng dụng</th>
+								<th scope="col">Tên hiển thị</th>
 								<th scope="col"></th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td>xxxxxxx</td>
-								<td>xxxxxxx</td>
 								<td>xxxxxxx</td>
 								<td>xxxxxxx</td>
 								<td><span data-toggle="modal" data-target="#modalEdit">
@@ -63,8 +59,41 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<div class="modal fade" id="add" tabindex="-1"
+		aria-labelledby="staticModalLabel" data-backdrop="static"
+		aria-hidden="true">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="largeModalLabel">Thiết lập ứng dụng</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					
+					<div class="row">
+						<div class="col-lg-12">
+							<p class="font-weight-bold mb-0">Tên hiển thị</p>
+							<div class="col-lg-12">
+								<input class="form-control my-2 app-name" placeholder="Tên mà bạn muốn liên kết với ID ứng dụng này" />
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary register-app" data-dismiss="modal"
+						data-toggle="modal" data-target="#thong-bao" >Thiết lập</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- <div class="modal fade" id="add" tabindex="-1"
 		aria-labelledby="staticModalLabel" data-backdrop="static"
 		aria-hidden="true">
 		<div class="modal-dialog modal-lg">
@@ -97,8 +126,8 @@
 									ứng dụng khi ứng dụng yêu cầu truy cập thông tin tài khoản của
 									User. Chuỗi này được giữ bí mật giữa Application và API. 
 									<input class="form-control my-3 web-code" placeholder="Mã bảo mật" /> 
-									<!-- Xác nhận. Nhập lại mã! 
-									<input class="form-control my-3" placeholder="Nhập lại mã" /> -->
+									Xác nhận. Nhập lại mã! 
+									<input class="form-control my-3" placeholder="Nhập lại mã" />
 									<hr class="m-0">
 									<div class="font-weight-bold mt-3">URL trang web</div>
 									Là đường link URL mà Authorization Server sẽ gửi Authorization
@@ -133,7 +162,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	
 	<div class="modal fade" id="modalEdit" tabindex="-1" aria-labelledby="staticModalLabel" data-backdrop="static" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
@@ -149,28 +178,61 @@
 				<div class="modal-body">
 					<div class="form-group row">
 						<div class="col-md-3">
-							<label class="col-form-label">Tên trang web</label>
+							<label class="col-form-label">ID ứng dụng</label>
+						</div>
+						<div class="col-md-9">
+							<input class="form-control edit-id" placeholder="" disabled="disabled">
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-md-3">
+							<label class="col-form-label">Khóa bảo mật</label>
+						</div>
+						<div class="col-md-9">
+							<div class="col-md-9 pl-0">
+								<input class="form-control edit-code" placeholder="" disabled="disabled">
+							</div>
+							<button class="col-md-2 btn hien-thi">Hiển thị</button>
+							<button class="col-md-2 btn dat-lai" style="display: none;">Đặt lại</button>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-md-3">
+							<label class="col-form-label">Tên hiển thị</label>
 						</div>
 						<div class="col-md-9">
 							<input class="form-control edit-name" placeholder="">
 						</div>
 					</div>
 					<div class="form-group row">
-						<div class="col-md-3">
-							<label class="col-form-label">Mã bảo mật</label>
+						<div class="col-md-12">
+							<label class="col-form-label font-weight-bold">Thêm thông tin cấu hình sau vào web của bạn</label>
 						</div>
-						<div class="col-md-9">
-							<input class="form-control edit-code" placeholder="Enter the value to change">
+						<div class="col-md-12">
+<pre class="bg-light text-dark py-3">
+	security:
+	  oauth2:
+	    client:
+	      client-id: {your-app-id}
+	      client-secret: {your-app-code}
+	      user-authorization-uri: http://localhost:8080/oauth/authorize
+	      access-token-uri: http://localhost:8080/oauth/token
+	    resource:
+	      token-info-uri: http://localhost:8080/oauth/check_token
+</pre>
 						</div>
 					</div>
+					
 					<div class="form-group row">
 						<div class="col-md-3">
 							<label class="col-form-label">URL trang web</label>
 						</div>
 						<div class="col-md-9">
-							<input class="form-control edit-url" placeholder="">
+							<input class="form-control edit-url" placeholder="URL của trang web">
 						</div>
 					</div>
+					
 					<div class="form-group row">
 						<div class="col-md-3">
 							<label class="col-form-label">Scope</label>
