@@ -12,6 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @Order(1)
@@ -32,11 +33,26 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
-//	@Override
-//	protected void configure(HttpSecurity http) throws Exception {
-//		http.csrf().disable();
-//		http.authorizeRequests().antMatchers("/oauth/token", "/oauth/authorize", "/oauth/check_token").permitAll();
-//		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//	}
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+			.authorizeRequests()
+				.anyRequest().permitAll()
+				.and()
+			.formLogin()
+				.loginPage("/login")
+				.loginProcessingUrl("/sign-in")
+				.usernameParameter("username")
+				.passwordParameter("password")
+				.failureUrl("/login?error=true")
+				.and()
+			.logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/")
+				.deleteCookies("JSESSIONID")
+				.invalidateHttpSession(true)
+				.and()
+			.exceptionHandling().accessDeniedPage("/403");
+	}
 	
 }

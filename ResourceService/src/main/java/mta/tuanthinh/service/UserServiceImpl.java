@@ -82,7 +82,11 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public String deleteById(String id) {
-		userRepository.deleteById(id);
+		User user = userRepository.findById(id).get();
+		UserInfShare InfShare = userInfShareRepository.findByUsername(user.getUsername()).get();
+		
+		userRepository.delete(user);
+		userInfShareRepository.delete(InfShare);
 		return id;
 	}
 
